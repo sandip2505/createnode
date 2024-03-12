@@ -1,8 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
 
-const createProject = async (projectName) => {
+import {execSync} from 'child_process';
+
+
+const createProject = async (projectName,authername) => {
   const projectPath = path.join(process.cwd(), projectName);
 
   // Create the project directory
@@ -19,7 +21,9 @@ const createProject = async (projectName) => {
     scripts: {
       start: 'nodemon src/index.js', // Updated to reflect the new structure
     },
+    author: authername?authername:'',
     dependencies: {
+      dotenv: "^16.4.5",
       express: '^4.17.1',
       mongoose: '^6.2.1',
       nodemon: "^3.1.0",
@@ -50,9 +54,10 @@ const createProject = async (projectName) => {
   // Create db.js in the 'db' directory
   const dbJs = `
         const mongoose = require('mongoose');
+        require('dotenv').config()
         mongoose.set("strictQuery", false);
 
-        mongoose.connect("mongodb://0.0.0.0:27017/express-mongo", {
+        mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         }).then(() => {
@@ -118,7 +123,7 @@ const createProject = async (projectName) => {
       user.email = req.body.email;
       user.password = req.body.password;
       const updatedUser = await user.save();
-      res.status(200).json({status: true, data: updatedUser});
+      res.status(200).json({status: true, message: 'User updated successfully!', data: updatedUser});
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -202,6 +207,7 @@ const createProject = async (projectName) => {
     const express = require('express');
     const mongoose = require('./db/db');
     const app = express();
+    app.use(express.json());
     const PORT = process.env.PORT || 3000;
 
     // Require your routes and use them here
@@ -221,4 +227,5 @@ const createProject = async (projectName) => {
   console.log(`Project ${projectName} created successfully.`);
 };
 
-module.exports = createProject;
+// module.exports = createProject;
+export default createProject;

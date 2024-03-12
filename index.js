@@ -14,9 +14,11 @@
 
 // program.parse(process.argv);
 
+import inquirer from 'inquirer';
+import { program } from 'commander';
+import createProjectMongo from './commands/createProjectMongo.js';
+import createProjectSql from './commands/createProjectSql.js';
 
-const { program } = require('commander');
-const createProject = require('./commands/createProject');
 
 program
   .version('1.0.0')
@@ -27,24 +29,36 @@ program
   .description('Create a new project with CRUD API')
   .action(async (projectName) => {
     const authername = await prompt('Enter author name: ');
-    const dbname = await prompt('Enter database name: ');
-    console.log(authername, dbname, projectName)
-    createProject(projectName, authername, dbname);
+    const selectedDatabase = await selectDatabase();
+    // Dynamically import the appropriate createProject function
+    const createProjectFunction = selectedDatabase === 'MongoDB' ? createProjectMongo : createProjectSql;
+
+    createProjectFunction(projectName, authername);
   });
 
 program.parse(process.argv);
 
 async function prompt(question) {
-  const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise((resolve) => {
-    readline.question(question, (answer) => {
-      readline.close();
-      resolve(answer);
-    });
-  });
+  const answer = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'answer',
+      message: question,
+    },
+  ]);
+  return answer.answer;
 }
+
+async function selectDatabase() {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedDatabase',
+      message: 'Select a database:',
+      choices: ['MongoDB', 'MySQL'],
+    },
+  ]);
+  return answer.selectedDatabase;
+}
+
 
