@@ -1,24 +1,13 @@
 #!/usr/bin/env node
 
-// const { program } = require('commander');
-// const createProject = require('./commands/createProject');
-
-// program
-//   .version('1.0.0')
-//   .description('CLI for creating a Node.js project with a CRUD API');
-
-// program
-//   .command('create <projectName>')
-//   .description('Create a new project with CRUD API')
-//   .action(createProject);
-
-// program.parse(process.argv);
-
 import inquirer from 'inquirer';
 import { program } from 'commander';
 import createProjectMongo from './commands/createProjectMongo.js';
 import createProjectSql from './commands/createProjectSql.js';
 
+import createProjectMongoTypescript from './commands/createProjectMongoTypescript.js';
+import createProjectSqlTypescript from './commands/createProjectSqlTypescript.js';
+import ora from 'ora';
 
 program
   .version('1.0.0')
@@ -30,10 +19,36 @@ program
   .action(async (projectName) => {
     const authername = await prompt('Enter author name: ');
     const selectedDatabase = await selectDatabase();
-    // Dynamically import the appropriate createProject function
-    const createProjectFunction = selectedDatabase === 'MongoDB' ? createProjectMongo : createProjectSql;
+    const selectedLanguage = await selectLanguage();
 
-    createProjectFunction(projectName, authername);
+    let createProjectFunction;
+
+    if (selectedLanguage === 'TypeScript') {
+      createProjectFunction = selectedDatabase === 'MongoDB' ? createProjectMongoTypescript : createProjectSqlTypescript;
+    } else {
+      createProjectFunction = selectedDatabase === 'MongoDB' ? createProjectMongo : createProjectSql;
+    }
+
+    const spinner = ora('Creating project').start();
+    let progress = 0;
+
+    try {
+      // Simulate progress and wait for the project creation function to complete
+      const progressInterval = setInterval(() => {
+        progress += 10;
+        spinner.text = `Creating project (${progress}%)`;
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+          spinner.succeed('Project created successfully');
+        }
+      }, 500);
+
+      await createProjectFunction(projectName, authername);
+
+    } catch (error) {
+      spinner.fail('Project creation failed');
+      console.error(error);
+    }
   });
 
 program.parse(process.argv);
@@ -60,5 +75,19 @@ async function selectDatabase() {
   ]);
   return answer.selectedDatabase;
 }
+
+
+async function selectLanguage() {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedLanguage',
+      message: 'Select a language:',
+      choices: ['TypeScript', 'JavaScript'],
+    },
+  ]);
+  return answer.selectedLanguage;
+}
+
 
 

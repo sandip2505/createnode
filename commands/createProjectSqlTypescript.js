@@ -45,6 +45,7 @@ const createProject = async (projectName,authername) => {
   DB_PASSWORD=
   DB_NAME=sequelize_test
   DB_DIALECT=mysql
+  TYPESCRIPT=true
 
 `;
 

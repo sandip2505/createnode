@@ -40,6 +40,7 @@ const createProject = async (projectName,authername) => {
   const env = `
     PORT=3000
     MONGO_URI=mongodb://
+    TYPESCRIPT=true
 
 `;
 
