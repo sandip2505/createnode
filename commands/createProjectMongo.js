@@ -36,14 +36,14 @@ const createProject = async (projectName,authername) => {
   // Change to the project directory
   process.chdir(projectPath);
 
-  // Create .env file
+  // Create .env.example file
   const env = `
     PORT=3000
     MONGO_URI=mongodb://
 
 `;
 
-  fs.writeFileSync('.env', env);
+  fs.writeFileSync('.env.example', env);
 
   // Create the 'src' directory
   fs.mkdirSync(path.join(projectPath, 'src'));
@@ -57,7 +57,7 @@ const createProject = async (projectName,authername) => {
         require('dotenv').config()
         mongoose.set("strictQuery", false);
 
-        mongoose.connect(process.env.MONGO_URI, {
+        mongoose.connect(process.env.example.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         }).then(() => {
@@ -208,7 +208,7 @@ const createProject = async (projectName,authername) => {
     const mongoose = require('./db/db');
     const app = express();
     app.use(express.json());
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.example.PORT || 3000;
 
     // Require your routes and use them here
     const userRoute = require('./route/userRoute');
@@ -221,8 +221,7 @@ const createProject = async (projectName,authername) => {
 
   fs.writeFileSync('src/index.js', indexJs);
 
-  // Install dependencies
-  execSync('npm install');
+  
 
 };
 

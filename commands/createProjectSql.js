@@ -37,7 +37,7 @@ const createProject = async (projectName,authername) => {
   // Change to the project directory
   process.chdir(projectPath);
 
-  // Create .env file
+  // Create .env.example file
   const env = `
   PORT=3000
   DB_HOST=localhost
@@ -48,7 +48,7 @@ const createProject = async (projectName,authername) => {
 
 `;
 
-  fs.writeFileSync('.env', env);
+  fs.writeFileSync('.env.example', env);
 
   // Create the 'src' directory
   fs.mkdirSync(path.join(projectPath, 'src'));
@@ -60,9 +60,9 @@ const createProject = async (projectName,authername) => {
   const config = `
           const { Sequelize } = require('sequelize');
           require('dotenv').config()
-          const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-            host: process.env.DB_HOST,
-            dialect: process.env.DB_DIALECT,
+          const sequelize = new Sequelize(process.env.example.DB_NAME, process.env.example.DB_USER, process.env.example.DB_PASSWORD, {
+            host: process.env.example.DB_HOST,
+            dialect: process.env.example.DB_DIALECT,
           });
 
           
@@ -256,7 +256,7 @@ module.exports = apicontroller;
     const mongoose = require('./db/db');
     const app = express();
     app.use(express.json());
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.example.PORT || 3000;
 
     // Require your routes and use them here
     const userRoute = require('./route/userRoute');
@@ -270,7 +270,7 @@ module.exports = apicontroller;
   fs.writeFileSync('src/index.js', indexJs);
 
   // Install dependencies
-  execSync('npm install');
+ 
 
 };
 

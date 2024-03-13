@@ -35,7 +35,7 @@ program
     try {
       // Simulate progress and wait for the project creation function to complete
       const progressInterval = setInterval(() => {
-        progress += 10;
+        progress += 5;
         spinner.text = `Creating project (${progress}%)`;
         if (progress >= 100) {
           clearInterval(progressInterval);
