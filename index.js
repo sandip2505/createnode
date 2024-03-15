@@ -8,6 +8,26 @@ import createProjectSql from './commands/createProjectSql.js';
 import createProjectMongoTypescript from './commands/createProjectMongoTypescript.js';
 import createProjectSqlTypescript from './commands/createProjectSqlTypescript.js';
 import ora from 'ora';
+import chalk from 'chalk';
+import gradient from 'gradient-string';
+import chalkAnimation from 'chalk-animation';
+import figlet from 'figlet';
+
+
+function winner() {
+  console.clear();
+  figlet(`PROJECT  CREATED  SUCCESSFULLY`, (err, data) => {
+    console.log(gradient.pastel.multiline(data) + '\n');
+
+    console.log(
+      chalk.green(
+        `Your project has been created successfully. Now, let's make some magic happen!`
+      )
+    );
+    process.exit(0);
+  });
+}
+
 
 program
   .version('1.0.0')
@@ -34,12 +54,13 @@ program
 
     try {
       // Simulate progress and wait for the project creation function to complete
+
       const progressInterval = setInterval(() => {
-        progress += 5;
+        progress += 10;
         spinner.text = `Creating project (${progress}%)`;
         if (progress >= 100) {
           clearInterval(progressInterval);
-          spinner.succeed('Project created successfully');
+          winner();
         }
       }, 500);
 
