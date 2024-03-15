@@ -6,16 +6,25 @@ Node-CRUDify is a versatile command-line interface (CLI) tool designed to stream
 
 To use node-crudify, you need to have Node.js and npm (Node Package Manager) installed on your system. You can install node-crudify globally using npm:
 
-`npm install -g node-crudify`
+```
+npm install -g node-crudify
+```
 
 To create a new project with node-crudify, run the following command:
 
-`node-crud create <projectName>`
+```
+node-crud create <projectName>
+```
 
 After creating the project, navigate to its directory and install dependencies:
 
-`cd <projectName>`
-`npm install`
+```
+cd <projectName>
+```
+
+```
+npm install
+```
 
 ## Configuration
 
