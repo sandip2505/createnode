@@ -15,7 +15,16 @@
     "url": "git+https://github.com/sandip2505/createnode.git"
   },
   "keywords": [
-    "node"
+    "node",
+    "CLI",
+    "command-line",
+    "CRUD",
+    "Node.js",
+    "development",
+    "boilerplate",
+    "database",
+    "typescript",
+    "javascript"
   ],
   "author": "Sandip Ganava",
   "license": "ISC",

@@ -104,7 +104,7 @@ async function selectLanguage() {
       type: 'list',
       name: 'selectedLanguage',
       message: 'Select a language:',
-      choices: ['JavaScript',],
+      choices: ['JavaScript', 'TypeScript'],
     },
   ]);
   return answer.selectedLanguage;

@@ -208,7 +208,7 @@ const createProject = async (projectName,authername) => {
     const mongoose = require('./db/db');
     const app = express();
     app.use(express.json());
-    const PORT = process.env.example.PORT || 3000;
+    const PORT = process.env.PORT || 3000;
 
     // Require your routes and use them here
     const userRoute = require('./route/userRoute');
