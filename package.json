@@ -1,6 +1,6 @@
 {
   "name": "node-crudify",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Create a new project with CRUD API",
   "main": "index.js",
   "type": "module",
