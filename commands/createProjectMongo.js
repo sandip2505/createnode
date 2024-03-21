@@ -57,7 +57,7 @@ const createProject = async (projectName,authername) => {
         require('dotenv').config()
         mongoose.set("strictQuery", false);
 
-        mongoose.connect(process.env.example.MONGO_URI, {
+        mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         }).then(() => {

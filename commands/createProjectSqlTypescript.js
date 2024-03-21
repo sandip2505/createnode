@@ -25,8 +25,9 @@ const createProject = async (projectName, authername) => {
     dependencies: {
       dotenv: "^16.4.5",
       express: '^4.17.1',
-      mongoose: "^6.2.1",
+      mysql2: "^3.9.2",
       nodemon: "^3.1.0",
+      sequelize: "^6.37.1",
       typescript: "^5.4.2",
 
     },
