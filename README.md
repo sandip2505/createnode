@@ -34,18 +34,18 @@ Before running the application, make sure to set up your environment variables b
 
 ## Advantages
 
-Rapid Development: Quickly generate boilerplate code for CRUD operations, accelerating the development process.
+**Rapid Development**: Quickly generate boilerplate code for CRUD operations, accelerating the development process.
 
-Flexibility: Choose from multiple database options, including MongoDB and MySQL, to suit your project requirements.
+**Flexibility**: Choose from multiple database options, including MongoDB and MySQL, to suit your project requirements.
 
-Customization: Easily customize and extend the generated code to meet the specific needs of your project.
+**Customization**: Easily customize and extend the generated code to meet the specific needs of your project.
 
-Programming Language Support: Supports both TypeScript and JavaScript, giving you the flexibility to choose the language that best fits your project.
+**Programming Language Support**: Supports both TypeScript and JavaScript, giving you the flexibility to choose the language that best fits your project.
 
-Consistency: Ensure consistency across projects with predefined project structures, naming conventions, and code organization.
+**Consistency**: Ensure consistency across projects with predefined project structures, naming conventions, and code organization.
 
-Community Support: Benefit from community contributions, feedback, and collaboration to improve the tool over time.
+**Community Support**: Benefit from community contributions, feedback, and collaboration to improve the tool over time.
 
-Scalability: Built with a modular and scalable architecture to support growth and handle increased traffic as your project evolves.
+**Scalability**: Built with a modular and scalable architecture to support growth and handle increased traffic as your project evolves.
 
-Educational Resource: Serve as an educational resource for developers new to Node.js or web development, providing insight into best practices and common patterns.
+**Educational Resource**: Serve as an educational resource for developers new to Node.js or web development, providing insight into best practices and common patterns.
